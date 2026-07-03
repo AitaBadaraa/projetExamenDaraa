@@ -11,10 +11,10 @@
             com.mysql.cj.jdbc.Driver
         </property>
         <property name="hibernate.connection.url">
-            jdbc:mysql://localhost:3307/ecole?serverTimezone=UTC
+            jdbc:mysql://localhost:3306/daara?serverTimezone=UTC&amp;allowPublicKeyRetrieval=true
         </property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.password"></property>
 
         <!-- Dialecte SQL utilisé par Hibernate -->
         <property name="hibernate.dialect">
@@ -26,11 +26,14 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.use_sql_comments">true</property>
 
-        <!-- Gestion automatique du schéma : update | create | validate | none -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <!-- update = met à jour sans effacer les données -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
-        <!-- Classes annotées à enregistrer -->
-        <mapping class="sn.youdev.hib.model.Etudiant"/>
+        <!-- Les 4 entités JPA du projet Daara -->
+        <mapping class="sn.l2gl.girls.daara.model.models.Maitre"/>
+        <mapping class="sn.l2gl.girls.daara.model.models.Classe"/>
+        <mapping class="sn.l2gl.girls.daara.model.models.Talibe"/>
+        <mapping class="sn.l2gl.girls.daara.model.models.Progression"/>
 
     </session-factory>
 </hibernate-configuration>
