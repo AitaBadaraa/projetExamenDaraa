@@ -1,6 +1,5 @@
 package sn.l2gl.girls.daara.model.models;
 
-import sn.l2gl.girls.daara.model.models.Class;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,5 +28,5 @@ public class Talibe {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "classe_code")
-    private Class classe;
+    private Classe classe;
 }
