@@ -1,5 +1,6 @@
 package sn.l2gl.girls.daara.model.models;
 
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public class Talibe {
     @ManyToOne(optional = false)
     @JoinColumn(name = "classe_code")
     private Classe classe;
+
 
     public Talibe() {}
 
@@ -43,4 +45,5 @@ public class Talibe {
 
     public Classe getClasse() { return classe; }
     public void setClasse(Classe classe) { this.classe = classe; }
+
 }
