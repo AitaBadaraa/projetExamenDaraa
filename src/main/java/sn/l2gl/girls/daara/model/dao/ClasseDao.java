@@ -95,12 +95,12 @@ public class ClasseDao implements Dao<Classe, String> {
     // Supprimer une classe
     @Override
     public boolean supprimer(String code){
-        // 1. La classe doit exister
+        //  La classe doit exister
         Classe c = trouverObligatoire(code);
 
         Transaction transaction = null;
         try(Session session = ouvrirSession()){
-            // 2. Règle métier : suppression interdite si la classe contient
+            //  Règle métier : suppression interdite si la classe contient
             //    encore au moins un talibé.
             Long nbTalibes = session.createQuery(
                     """

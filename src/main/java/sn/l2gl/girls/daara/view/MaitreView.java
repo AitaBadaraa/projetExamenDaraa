@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
+import sn.l2gl.girls.daara.model.models.Maitre;
+import lombok.Getter;
 
+@Getter
 public class MaitreView extends JPanel {
     private final JTextField champMatricule = new JTextField(15);
     private final JTextField champNomComplet = new JTextField(15);
