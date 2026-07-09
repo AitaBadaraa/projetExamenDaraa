@@ -1,6 +1,9 @@
 package sn.l2gl.girls.daara.model.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 
 @Entity
 @Table(name = "classes")
