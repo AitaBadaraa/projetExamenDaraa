@@ -1,8 +1,13 @@
 package sn.l2gl.girls.daara.model.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "progressions")
 public class Progression {
@@ -21,5 +26,4 @@ public class Progression {
 
     public Progression() {}
 
-    // getters setters
 }

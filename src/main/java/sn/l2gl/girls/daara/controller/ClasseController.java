@@ -1,6 +1,6 @@
 package sn.l2gl.girls.daara.controller;
 
-import sn.l2gl.girls.daara.exception.ClasseDejaExistantException;
+import sn.l2gl.girls.daara.exception.ClasseDejaExistanteException;
 import sn.l2gl.girls.daara.model.dao.ClasseDao;
 import sn.l2gl.girls.daara.model.dao.MaitreDao;
 import sn.l2gl.girls.daara.model.models.Classe;
@@ -258,7 +258,7 @@ public class ClasseController {
 
             enCours = null;
 
-        } catch (ClasseDejaExistantException e) {
+        } catch (ClasseDejaExistanteException e) {
 
             JOptionPane.showMessageDialog(vue, e.getMessage());
 

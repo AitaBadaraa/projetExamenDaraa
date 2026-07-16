@@ -51,7 +51,7 @@ public class MaitreDao implements Dao<Maitre, String> {
 
     // Retourne la liste de tous les maîtres en base
     @Override
-    public static List<Maitre> listerTous() {
+    public List<Maitre> listerTous() {
         try (Session s = getSession()) {
             return s.createQuery("from Maitre", Maitre.class).list();
         }
