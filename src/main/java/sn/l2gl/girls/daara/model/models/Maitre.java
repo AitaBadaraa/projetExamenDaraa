@@ -1,7 +1,11 @@
 package sn.l2gl.girls.daara.model.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "maitres")
 public class Maitre {
@@ -20,14 +24,6 @@ public class Maitre {
         this.telephone = telephone;
     }
 
-    public String getMatricule() { return matricule; }
-    public void setMatricule(String matricule) { this.matricule = matricule; }
-
-    public String getNomComplet() { return nomComplet; }
-    public void setNomComplet(String nomComplet) { this.nomComplet = nomComplet; }
-
-    public String getTelephone() { return telephone; }
-    public void setTelephone(String telephone) { this.telephone = telephone; }
     @Override
     public String toString() {
         return nomComplet;

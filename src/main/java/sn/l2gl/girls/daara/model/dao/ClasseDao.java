@@ -49,7 +49,7 @@ public class ClasseDao implements Dao<Classe, String> {
     @Override
     public Optional<Classe> trouver(String code){
         try(Session session = ouvrirSession()){
-            Classe c = session.get(Classe.class, code);
+            Classe c = session.find(Classe.class, code);
             return Optional.ofNullable(c);
         }
     }
@@ -81,7 +81,7 @@ public class ClasseDao implements Dao<Classe, String> {
         Transaction transaction = null;
         try(Session session = ouvrirSession()){
             transaction = session.beginTransaction();
-            Classe resultat = (Classe) session.merge(c);
+            Classe resultat = session.merge(c);
             transaction.commit();
             return Optional.of(resultat);
         } catch (Exception e) {
@@ -95,8 +95,8 @@ public class ClasseDao implements Dao<Classe, String> {
     // Supprimer une classe
     @Override
     public boolean supprimer(String code){
-        //  La classe doit exister
-        Classe c = trouverObligatoire(code);
+        //  La classe doit exister (leve ClasseIntrouvableException si absente)
+        trouverObligatoire(code);
 
         Transaction transaction = null;
         try(Session session = ouvrirSession()){
@@ -119,7 +119,7 @@ public class ClasseDao implements Dao<Classe, String> {
 
             transaction = session.beginTransaction();
             // on retrouve l'entité DANS cette session avant de la supprimer
-            Classe managed = session.get(Classe.class, code);
+            Classe managed = session.find(Classe.class, code);
             session.remove(managed);
             transaction.commit();
             return true;
@@ -136,9 +136,8 @@ public class ClasseDao implements Dao<Classe, String> {
     // Rechercher Par libelle
     public List<Classe> rechercherParLibelle(String libelle){
         try(Session session = ouvrirSession()){
-            return session.createQuery(
-                    """ 
-                        from Classe c 
+            return session.createQuery("""
+                        from Classe c
                         where lower(c.libelle)
                         like lower(:libelle)
                         order by c.libelle
@@ -152,8 +151,7 @@ public class ClasseDao implements Dao<Classe, String> {
     //Lister par maitre
     public List<Classe> listerParMaitre(String matricule){
         try(Session session = ouvrirSession()){
-            return session.createQuery(
-                    """
+            return session.createQuery("""
                         from Classe c
                         where c.maitre.matricule = :matricule
                         order by c.libelle
