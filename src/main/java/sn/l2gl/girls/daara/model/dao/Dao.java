@@ -8,7 +8,7 @@ public interface Dao <T, ID>{
     //Ajouter un objet dans la base
     T inserer(T entity);
     //Recherche unique
-    Optional<T>  trouver(ID id);
+    Optional<T> trouver(ID id);
     //Retourne toute la liste
     List<T> listerTous();
     Optional<T> modifier(T entity);

@@ -14,10 +14,11 @@ public class CsvExporter {
             File fichier,
             String[] entetes,
             List<String[]> lignes
-    ) throws IOException {
+    ) throws IOException {// Peut échouer si l'écriture du fichier rencontre un problème
 
-
+        //creattion d'un outil pour ecrire un texte  dans un fichier
         try(BufferedWriter w = Files.newBufferedWriter(
+                //transformation du fichier en objet path
                 fichier.toPath(),
                 StandardCharsets.UTF_8
         )){
@@ -25,10 +26,12 @@ public class CsvExporter {
 
             //Ecriture de l'entete
             w.write(String.join(",", entetes));
+            //passer a la ligne suivante
             w.newLine();
 
 
             //Ecriture des lignes
+            // parcours de  chaque enregistrement à écrire
             for(String[] ligne : lignes){
 
                 w.write(String.join(",", ligne));

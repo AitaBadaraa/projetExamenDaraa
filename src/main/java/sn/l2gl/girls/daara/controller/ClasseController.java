@@ -36,7 +36,7 @@ public class ClasseController {
     private Classe enCours;
 
 
-    // Constructeur :
+    // Constructeur
     public ClasseController(ClasseView vue) {
 
         this.vue = vue;
@@ -44,13 +44,13 @@ public class ClasseController {
         // On va chercher tous les maîtres en base pour remplir le JComboBox de la vue
         vue.setListeMaitres(maitreDao.listerTous());
 
-        // On "branche" chaque bouton de la vue à une méthode du contrôleur
-        // Quand l'utilisateur clique, la méthode correspondante s'exécute
+        // On branche chaque bouton de la vue à une méthode du contrôleur
+        // Quand l'utilisateur clique la méthode correspondante s'exécute
         vue.getBtnChercher().addActionListener(e -> rechercher());
         vue.getBtnEnregistrer().addActionListener(e -> enregistrer());
         vue.getBtnSupprimer().addActionListener(e -> supprimer());
 
-        // Le bouton "Tout afficher" vide le champ de recherche ET réaffiche toute la liste
+        // Le bouton Tout afficher vide le champ de recherche et reaffiche toute la liste
         vue.getBtnToutAfficher().addActionListener(e -> {
             vue.getTxtrechercher().setText("");
             lister();
@@ -85,7 +85,7 @@ public class ClasseController {
         // On va chercher la classe correspondante dans la base via le DAO
         Optional<Classe> resultat = dao.trouver(code);
 
-        // Si la classe existe bien
+        // Si la classe existe
         if (resultat.isPresent()) {
 
             // On la garde en mémoire (mode "modification" activé)
@@ -153,6 +153,7 @@ public class ClasseController {
     //  récupère toutes les classes et les affiche dans le tableau
 
     private void lister() {
+
         vue.afficher(dao.listerTous());
     }
 
@@ -203,7 +204,7 @@ public class ClasseController {
 
         try {
 
-           //recupere les donne saisie pat l'utilisateur
+           //recupere les donnees saisie pat l'utilisateur
             String code = vue.getTxtcode().getText();
             String libelle = vue.getTxtlibelle().getText();
 

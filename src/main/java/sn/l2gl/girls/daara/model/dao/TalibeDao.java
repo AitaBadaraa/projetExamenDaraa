@@ -13,7 +13,7 @@ import java.util.Optional;
 public class TalibeDao implements Dao<Talibe, String>{
     @Override
     public Talibe inserer(Talibe entity) {
-
+        //on ouvre une session de  connexion vers la base de donnee
         Session s= HibernateUtil.getSessionFactory().openSession();
         // On vérifie d'abord si le matricule existe déjà
         Talibe existant = s.find(Talibe.class, entity.getMatricule());
@@ -36,14 +36,14 @@ public class TalibeDao implements Dao<Talibe, String>{
 
         //se connecter à la base
         Session s = HibernateUtil.getSessionFactory().openSession();
-        //on cherche par clé primaire avec find()
+        //on cherche par clé primaire avec find() le talibe
         Talibe t = s.find(Talibe.class, matricule);
         s.close(); //ferner la connexion
         return Optional.ofNullable(t);
 
     }
 
-    // Recherche obligatoire : utilisée quand on modifie/supprime/affiche un détail
+    // Recherche obligatoire utilisée quand on modifie/supprime/affiche
     public Talibe trouverObligatoire(String matricule) {
         return trouver(matricule)
                 .orElseThrow(() -> new TalibeIntrouvableException(matricule));
@@ -82,7 +82,7 @@ public class TalibeDao implements Dao<Talibe, String>{
             throw new TalibeIntrouvableException(matricule);
         }
 
-        s.remove(t); // grâce à la cascade sur Talibe, ses progressions seront aussi supprimées
+        s.remove(t); // grace à la cascade sur Talibe, ses progressions seront aussi supprimées
         tx.commit(); //on valide
         s.close();
         return true;

@@ -72,9 +72,9 @@ public class ClasseView extends JPanel {
         add(panelButtons, BorderLayout.SOUTH);
 
     }
-    //METHODE AFFICHER
+    //METHODE AFFICHER on prends une liste de classe et on l'affiche dans le tableau
     public void afficher(List<Classe> liste) {
-
+        //on vide la tableau avant de le remplir
         model.setRowCount(0);
         //Pour chaque classe de la liste
         for (Classe c : liste) {
@@ -93,6 +93,7 @@ public class ClasseView extends JPanel {
 
         txtcode.setText(c.getCode());
         txtlibelle.setText(c.getLibelle());
+        // Sélectionne dans la liste déroulante l'élément correspondant à la valeur donnée
         cmbNiveau.setSelectedItem(c.getNiveau());
         cmbMaitre.setSelectedItem(c.getMaitre());
     }
@@ -103,14 +104,17 @@ public class ClasseView extends JPanel {
         txtcode.setText("");
         txtlibelle.setText("");
         txtrechercher.setText("");
+        // Remet la combobox des niveaux sur son premier élément
         cmbNiveau.setSelectedIndex(0);
-        // On ne réinitialise l'index que si la liste des maîtres n'est pas vide
+
+        // On verifie d'abord qu'il y a au moins un maître dans la liste
         if (cmbMaitre.getItemCount() > 0) {
             cmbMaitre.setSelectedIndex(0);
         }
     }
 
     // CHARGER LISTE DES MAITRES
+    // Vide la liste déroulante des maîtres puis la remplit avec la liste reçue depuis la base de donnes
     public void setListeMaitres(List<Maitre> maitres) {
 
         cmbMaitre.removeAllItems();
