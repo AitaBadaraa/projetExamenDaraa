@@ -26,7 +26,16 @@ public class ProgressionController {
     public ProgressionController(ProgressionView vue) {
         this.vue = vue;
 
-        vue.setListeTalibes(talibeDao.listerTous());
+        //vue.setListeTalibes(talibeDao.listerTous());
+        List<Talibe> talibes = talibeDao.listerTous();
+
+        System.out.println("Nombre de talibés : " + talibes.size());
+
+        for (Talibe t : talibes) {
+            System.out.println(t.getMatricule() + " - " + t.getNom());
+        }
+
+        vue.setListeTalibes(talibes);
 
         vue.getBoutonAjouter().addActionListener(e -> enregistrer());
         vue.getBoutonModifier().addActionListener(e -> enregistrer());

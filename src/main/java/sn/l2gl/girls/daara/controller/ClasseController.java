@@ -41,8 +41,17 @@ public class ClasseController {
 
         this.vue = vue;
 
+
         // On va chercher tous les maîtres en base pour remplir le JComboBox de la vue
-        vue.setListeMaitres(maitreDao.listerTous());
+        List<Maitre> maitres = maitreDao.listerTous();
+
+        System.out.println("Nombre de maîtres : " + maitres.size());
+
+        for (Maitre m : maitres) {
+            System.out.println(m.getMatricule() + " - " + m.getNomComplet());
+        }
+
+        vue.setListeMaitres(maitres);
 
         // On branche chaque bouton de la vue à une méthode du contrôleur
         // Quand l'utilisateur clique la méthode correspondante s'exécute

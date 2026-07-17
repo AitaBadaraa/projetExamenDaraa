@@ -19,6 +19,7 @@ public class AppDaara extends JFrame {
         setSize(950, 600);
         setLocationRelativeTo(null);
 
+        AccueilView accueilView = new AccueilView();
         MaitreView maitreView = new MaitreView();
         new MaitreController(maitreView);
 
@@ -30,7 +31,7 @@ public class AppDaara extends JFrame {
 
         ProgressionView progressionView = new ProgressionView();
         new ProgressionController(progressionView);
-
+        conteneur.add(accueilView, "ACCUEIL");
         conteneur.add(maitreView, "MAITRE");
         conteneur.add(classeView, "CLASSE");
         conteneur.add(talibeView, "TALIBE");
@@ -38,7 +39,8 @@ public class AppDaara extends JFrame {
 
         setContentPane(conteneur);
         setJMenuBar(construireMenu());
-        cartes.show(conteneur, "MAITRE");
+        //cartes.show(conteneur, "MAITRE");
+        cartes.show(conteneur, "ACCUEIL");
     }
 
     private JMenuBar construireMenu() {
