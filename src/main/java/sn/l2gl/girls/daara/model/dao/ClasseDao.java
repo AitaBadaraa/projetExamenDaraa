@@ -121,7 +121,7 @@ public class ClasseDao implements Dao<Classe, String> {
 
             transaction = session.beginTransaction();
             // on retrouve l'entité DANS cette session avant de la supprimer
-            Classe managed = session.get(Classe.class, code);
+            Classe managed = session.find(Classe.class, code);
             session.remove(managed);
             transaction.commit();
             return true;
@@ -140,9 +140,8 @@ public class ClasseDao implements Dao<Classe, String> {
     // Rechercher Par libelle
     public List<Classe> rechercherParLibelle(String libelle){
         try(Session session = ouvrirSession()){
-            return session.createQuery(
-                    """ 
-                        from Classe c 
+            return session.createQuery("""
+                        from Classe c
                         where lower(c.libelle)
                         like lower(:libelle)
                         order by c.libelle
@@ -157,8 +156,7 @@ public class ClasseDao implements Dao<Classe, String> {
     //  prend un seul matricule de maître en entrée, et cherche toutes les classes que ce maître encadre
     public List<Classe> listerParMaitre(String matricule){
         try(Session session = ouvrirSession()){
-            return session.createQuery(
-                    """
+            return session.createQuery("""
                         from Classe c
                         where c.maitre.matricule = :matricule
                         order by c.libelle

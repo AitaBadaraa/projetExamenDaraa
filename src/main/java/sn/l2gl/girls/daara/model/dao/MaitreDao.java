@@ -1,5 +1,6 @@
 package sn.l2gl.girls.daara.model.dao;
 
+
 import sn.l2gl.girls.daara.model.models.Maitre;
 import sn.l2gl.girls.daara.exception.*;
 import sn.l2gl.girls.daara.util.HibernateUtil;
@@ -10,7 +11,7 @@ import java.util.*;
 public class MaitreDao implements Dao<Maitre, String> {
 
     // Ouvre une nouvelle session Hibernate à chaque opération
-    private Session getSession() {
+    private static Session getSession() {
         return HibernateUtil.getSessionFactory().openSession();
     }
 
@@ -119,3 +120,4 @@ public class MaitreDao implements Dao<Maitre, String> {
         }
     }
 }
+
