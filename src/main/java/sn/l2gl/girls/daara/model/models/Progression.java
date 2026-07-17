@@ -26,5 +26,4 @@ public class Progression {
 
     public Progression() {}
 
-    // getters setters
 }

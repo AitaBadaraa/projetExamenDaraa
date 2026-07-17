@@ -32,4 +32,9 @@ public class Talibe {
     private List<Progression> progressions = new ArrayList<>();
 
     public Talibe() {}
+
+    @Override
+    public String toString() {
+        return prenom + " " + nom + " (" + matricule + ")";
+    }
 }
