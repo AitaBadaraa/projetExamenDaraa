@@ -49,6 +49,7 @@ public class ClasseDao implements Dao<Classe, String> {
     @Override
     public Optional<Classe> trouver(String code){
         try(Session session = ouvrirSession()){
+            // Permet juste de tranformer ce qu'on aura comme resultat en objet
             Classe c = session.get(Classe.class, code);
             return Optional.ofNullable(c);
         }
@@ -66,6 +67,7 @@ public class ClasseDao implements Dao<Classe, String> {
         try(Session session = ouvrirSession()){
             return session.createQuery(
                     "from Classe order by libelle",
+                    // Permet juste de tranformer ce qu'on aura comme resultat en objet
                     Classe.class
             ).list();
         }
@@ -81,9 +83,9 @@ public class ClasseDao implements Dao<Classe, String> {
         Transaction transaction = null;
         try(Session session = ouvrirSession()){
             transaction = session.beginTransaction();
-            Classe resultat = (Classe) session.merge(c);
+            Classe resultat = (Classe) session.merge(c); //permet juste de fusionner et mets à jour la classe
             transaction.commit();
-            return Optional.of(resultat);
+            return Optional.of(resultat); // "ce qui a été réellement enregistré, confirmé par la base."
         } catch (Exception e) {
             if(transaction != null){
                 transaction.rollback();
@@ -96,18 +98,18 @@ public class ClasseDao implements Dao<Classe, String> {
     @Override
     public boolean supprimer(String code){
         //  La classe doit exister
-        Classe c = trouverObligatoire(code);
+        Classe c = trouverObligatoire(code); // appelle trouver(code), qui ouvre SA PROPRE session, l'utilise, PUIS LA FERME
 
         Transaction transaction = null;
-        try(Session session = ouvrirSession()){
+        try(Session session = ouvrirSession()){ // session B, différente de la session A
             //  Règle métier : suppression interdite si la classe contient
             //    encore au moins un talibé.
             Long nbTalibes = session.createQuery(
                     """
                         select count(t) from Talibe t
-                        where t.classe.code = :code
-                    """,
-                    Long.class
+                        where t.classe.code = :code 
+                    """, // est un paramètre nommé — un espace réservé dans la requête
+                    Long.class // count(...) renvoie toujours un type Long par convention
             ).setParameter("code", code).uniqueResult();
 
             if (nbTalibes != null && nbTalibes > 0) {
@@ -133,6 +135,8 @@ public class ClasseDao implements Dao<Classe, String> {
         }
     }
 
+    // "Cherche toutes les classes dont le libellé contient le texte tapé (n'importe où dedans, insensible à la casse), " +
+    // "triées par ordre alphabétique."
     // Rechercher Par libelle
     public List<Classe> rechercherParLibelle(String libelle){
         try(Session session = ouvrirSession()){
@@ -150,6 +154,7 @@ public class ClasseDao implements Dao<Classe, String> {
 
 
     //Lister par maitre
+    //  prend un seul matricule de maître en entrée, et cherche toutes les classes que ce maître encadre
     public List<Classe> listerParMaitre(String matricule){
         try(Session session = ouvrirSession()){
             return session.createQuery(
